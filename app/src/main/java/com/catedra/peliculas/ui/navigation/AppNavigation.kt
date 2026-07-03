@@ -46,8 +46,7 @@ fun AppNavigation() {
         composable(Rutas.PELICULAS) {
             PeliculasScreen(
                 onNavegar = { id ->
-                    // TODO Etapa 4a: navegar al destino de detalle pasando el id.
-                    // Usar navController.navigate(...) con Rutas.detalle(id)
+                    navController.navigate(Rutas.detalle(id))
                 }
             )
         }
@@ -55,19 +54,19 @@ fun AppNavigation() {
         // TODO Etapa 4b: registrar el destino de detalle.
         //
         // Estructura:
-        // composable(
-        //     route = Rutas.DETALLE,
-        //     arguments = listOf(
-        //         navArgument("peliculaId") { type = NavType.StringType }
-        //     )
-        // ) { backStackEntry ->
-        //     val peliculaId = backStackEntry.arguments?.getString("peliculaId") ?: ""
-        //     DetalleScreen(
-        //         peliculaId = peliculaId,
-        //         onVolver = { navController.popBackStack() }
-        //     )
-        // }
-        //
+        composable(
+             route = Rutas.DETALLE,
+             arguments = listOf(
+                 navArgument("peliculaId") { type = NavType.StringType }
+             )
+        ) { backStackEntry ->
+             val peliculaId = backStackEntry.arguments?.getString("peliculaId") ?: ""
+             DetalleScreen(
+                 peliculaId = peliculaId,
+                 onVolver = { navController.popBackStack() }
+             )
+         }
+
         // Pista: el patrón es exactamente el mismo que se mostró en la Sección 5.3
         // de la Clase 7. DetalleScreen ya está completo — solo necesitás conectarlo
         // al grafo de navegación.
